@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernMoviesWeb", "ModernMoviesWeb\ModernMoviesWeb.csproj", "{5965B99C-3095-47CD-934E-CB2D2D086F22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernMoviesWeb", "ModernMoviesWeb\ModernMoviesWeb.csproj", "{5965B99C-3095-47CD-934E-CB2D2D086F22}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ModernMoviesDB", "ModernMoviesDB\ModernMoviesDB.sqlproj", "{63CC17E3-CEFE-4147-A369-7B4499E8D068}"
 EndProject

@@ -1,0 +1,57 @@
+﻿@page
+@model ModernMoviesWeb.Pages.Account.RegisterModel
+@{
+}
+<form method="post">
+	<div class= "row m-2 text-danger" asp-validation-summary="All"></div>
+	<div class="row m-2">
+		<div class="col-2">
+			<label asp-for="newPerson.FirstName" class="form-label">First Name:</label>
+		</div>
+		<div class="col-10">
+			<input asp-for="newPerson.FirstName" type="text" class="form-control"/>
+			<span asp-validation-for="newPerson.FirstName" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<label asp-for="newPerson.LastName" class="form-label">Last Name:</label>
+		</div>
+		<div class="col-10">
+			<input asp-for="newPerson.LastName" type="text" class="form-control" />
+			<span asp-validation-for="newPerson.LastName" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<label asp-for="newPerson.Email" class="form-label">Email Address:</label>
+		</div>
+		<div class="col-10">
+			<input asp-for="newPerson.Email" type="email" class="form-control" />
+			<span asp-validation-for="newPerson.Email" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<label asp-for="newPerson.Password" class="form-label">Password:</label>
+		</div>
+		<div class="col-10">
+			<input asp-for="newPerson.Password" type="password" class="form-control" />
+			<span asp-validation-for="newPerson.Password" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<label asp-for="newPerson.PhoneNumber" class="form-label">Phone Number (Optional):</label>
+		</div>
+		<div class="col-10">
+			<input asp-for="newPerson.PhoneNumber" type="tel" class="form-control" />
+			<span asp-validation-for="newPerson.PhoneNumber" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<button id="btnRegister" class="btn btn-primary">Submit</button>
+		</div>
+	</div>
+</form>

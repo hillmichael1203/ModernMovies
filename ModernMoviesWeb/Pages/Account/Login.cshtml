@@ -1,0 +1,30 @@
+﻿@page
+@model ModernMoviesWeb.Pages.Account.LoginModel
+@{
+}
+<form method="POST">
+	<div class="row m-2 text-danger" asp-validation-summary="All"></div>
+	<div class="row m-2">
+		<div class = "col-2">
+			<label class="form-label" asp-for="loginUser.Email">Email</label>
+		</div>
+		<div class = "col-10">
+			<input type="email" class = "form-control" asp-for="loginUser.Email"/>
+			<span class= "text-danger" asp-validation-for="loginUser.Email"></span>
+		</div>
+	</div>
+	<div class = "row m-2">
+		<div class = "col-2">
+			<label class="form-label" asp-for="loginUser.Password">Password</label>	
+		</div>
+		<div class = "col-10">
+			<input type="password" class="form-control" asp-for="loginUser.Password"/>
+			<span class="text-danger" asp-validation-for="loginUser.Password"></span>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<button itemid="btnLogin" class="btn btn-primary">Sign In</button>
+		</div>
+	</div>
+</form>
