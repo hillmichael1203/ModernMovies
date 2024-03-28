@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using ModernMoviesBusiness;
 using ModernMoviesWeb.Pages.Model;
 
 namespace ModernMoviesWeb.Pages.Account
@@ -17,9 +18,7 @@ namespace ModernMoviesWeb.Pages.Account
         {
 			if(ModelState.IsValid)
 			{
-				//1. create a database connection string
-				string connString = "Server=(localdb)\\MSSQLLocalDB;Database=ModernMovies;Trusted_Connection=true;";
-				SqlConnection conn = new SqlConnection(connString);
+				SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString());
 				string cmdText = "SELECT Password FROM Person WHERE Email=@email";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@email", loginUser.Email);
@@ -31,8 +30,15 @@ namespace ModernMoviesWeb.Pages.Account
 					if(reader.IsDBNull(0))
 					{
 						string passwordHash = reader.GetString(0);
-						//verify password
-						return RedirectToPage("Home");
+						if(SecurityHelper.VerifyPassword(loginUser.Password, passwordHash))
+						{
+							return RedirectToPage("Index");
+						}
+						else
+						{
+							ModelState.AddModelError("LoginError", "Invalid credentials. Try again.");
+							return Page();
+						}
 					}
 					else
 					{

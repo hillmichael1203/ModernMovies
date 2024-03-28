@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ModernMoviesWeb.Pages.Model;
 using Microsoft.Data.SqlClient;
+using ModernMoviesBusiness;
 
 namespace ModernMoviesWeb.Pages.Account
 {
@@ -18,16 +19,14 @@ namespace ModernMoviesWeb.Pages.Account
             if(ModelState.IsValid)
             {
                 //1. create a database connection string
-                string connString = "Server=(localdb)\\MSSQLLocalDB;Database=ModernMovies;Trusted_Connection=true;";
-                SqlConnection conn = new SqlConnection(connString);
+                SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString());
                 //2. create a SQL command
-                string cmdText = "INSERT INTO Person(FirstName, LastName, Email, Password, PhoneNumber, RoleId, LastLoginTime) " +
-                    "VALUES (@firstName, @lastName, @email, @password, @phoneNumber, 2, @lastLoginTime )";
+                string cmdText = "INSERT INTO Person(Name, Email, Password, PhoneNumber, TypeId, LastLoginTime) " +
+                    "VALUES (@name, @email, @password, @phoneNumber, 0, @lastLoginTime )";
                 SqlCommand cmd = new SqlCommand(cmdText, conn);
-                cmd.Parameters.AddWithValue("@firstName", newPerson.FirstName);
-                cmd.Parameters.AddWithValue("@lastName", newPerson.LastName);
+                cmd.Parameters.AddWithValue("@name", newPerson.Name);
                 cmd.Parameters.AddWithValue("@email", newPerson.Email);
-                cmd.Parameters.AddWithValue("@password", newPerson.Password);
+                cmd.Parameters.AddWithValue("@password", SecurityHelper.GeneratePasswordHash(newPerson.Password));
                 if(newPerson.PhoneNumber != null)
                 {
 					cmd.Parameters.AddWithValue("@phoneNumber", newPerson.PhoneNumber);
