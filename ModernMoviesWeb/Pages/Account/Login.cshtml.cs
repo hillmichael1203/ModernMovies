@@ -27,7 +27,7 @@ namespace ModernMoviesWeb.Pages.Account
 				if(reader.HasRows)
 				{
 					reader.Read();
-					if(reader.IsDBNull(0))
+					if(!reader.IsDBNull(0))
 					{
 						string passwordHash = reader.GetString(0);
 						if(SecurityHelper.VerifyPassword(loginUser.Password, passwordHash))
