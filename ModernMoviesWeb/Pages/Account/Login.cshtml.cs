@@ -16,22 +16,48 @@ namespace ModernMoviesWeb.Pages.Account
 
         public IActionResult OnPost()
         {
-			if(ModelState.IsValid)
+			if (ModelState.IsValid)
 			{
-				SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString());
-				string cmdText = "SELECT Password FROM Person WHERE Email=@email";
+				return ProcessLogin();
+			}
+			else
+			{
+				ModelState.AddModelError("LoginError", "Invalid credentials. Try again.");
+				return Page();
+			}
+			
+		}
+
+		private void UpdateLoginTime(int userId)
+		{
+			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
+			{
+				string cmdText = @"UPDATE Person SET LastLoginTime = @lastLoginTime WHERE UserID = @userID";
+				SqlCommand cmd = new SqlCommand(cmdText, conn);
+				cmd.Parameters.AddWithValue("@lastLoginTime", DateTime.Now.ToString());
+				conn.Open();
+				cmd.ExecuteNonQuery();
+			}
+		}
+
+		private IActionResult ProcessLogin()
+		{
+			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
+			{
+				string cmdText = "SELECT Password, UserID FROM Person WHERE Email=@email";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@email", loginUser.Email);
 				conn.Open();
 				SqlDataReader reader = cmd.ExecuteReader();
-				if(reader.HasRows)
+				if (reader.HasRows)
 				{
 					reader.Read();
-					if(!reader.IsDBNull(0))
+					if (!reader.IsDBNull(0))
 					{
 						string passwordHash = reader.GetString(0);
-						if(SecurityHelper.VerifyPassword(loginUser.Password, passwordHash))
+						if (SecurityHelper.VerifyPassword(loginUser.Password, passwordHash))
 						{
+							UpdateLoginTime(reader.GetInt32(1));
 							return RedirectToPage("Index");
 						}
 						else
@@ -52,11 +78,6 @@ namespace ModernMoviesWeb.Pages.Account
 					return Page();
 				}
 			}
-			else
-			{
-				ModelState.AddModelError("LoginError", "Invalid credentials. Try again.");
-				return Page();
-			}
 		}
-    }
+	}
 }
