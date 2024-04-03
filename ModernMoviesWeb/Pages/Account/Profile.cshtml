@@ -1,0 +1,42 @@
+﻿@page
+@model ModernMoviesWeb.Pages.Account.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="row m-2">
+    <div class="col-2">
+        <label>Name:</label>
+    </div>
+    <div class="col-10">
+        <span>@Model.profile.Name</span>
+    </div>
+</div>
+
+<div class="row m-2">
+    <div class="col-2">
+        <label>Email:</label>
+    </div>
+    <div class="col-10">
+        <span>@Model.profile.Email</span>
+    </div>
+</div>
+
+<div class="row m-2">
+    <div class="col-2">
+        <label>Phone Number:</label>
+    </div>
+    <div class="col-10">
+        <span>@Model.profile.PhoneNumber</span>
+    </div>
+</div>
+
+<div class="row m-2">
+    <div class="col-2">
+        <label>Last Login:</label>
+    </div>
+    <div class="col-10">
+        <span>@Model.profile.LastLoginTime.ToString("g")</span>
+    </div>
+</div>
