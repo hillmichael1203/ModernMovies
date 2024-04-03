@@ -3,13 +3,16 @@
 @{
     ViewData["Title"] = "Profile";
 }
-<h2>@ViewData["Title"]</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/Styles/main.css"/>
+}
+<h2 id="test">@ViewData["Title"]</h2>
 
 <div class="row m-2">
     <div class="col-2">
         <label>Name:</label>
     </div>
-    <div class="col-10">
+    <div class="col-10" id="test">
         <span>@Model.profile.Name</span>
     </div>
 </div>
