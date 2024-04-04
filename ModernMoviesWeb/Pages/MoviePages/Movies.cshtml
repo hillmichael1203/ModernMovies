@@ -1,0 +1,94 @@
+﻿@page
+@model ModernMoviesWeb.Pages.MoviePages.MoviesModel
+@{
+}
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    MOVIE OPTIONS
+</button>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header pinkable">
+        <h2 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <!--Radio Buttons for Sorting Options-->
+        <h2 class="pinkable left-header">
+            SORT BY:<hr/>
+        </h2>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+                A TO Z
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+                RELEASE DATE
+            </label>
+        </div>
+
+        <!--Checkboxes for Category Options-->
+        <div class="position-absolute bottom-90">
+            <h2 class="pinkable left-header">
+                CATEGORIES:<hr />
+            </h2>
+            <h3 class="pinkable left-header">
+                GENRE:
+            </h3>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    Action
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    Comedy
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    Drama
+                </label>
+            </div>
+            <h3 class="pinkable left-header">
+                AGE RATING:
+            </h3>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    G
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    PG
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    PG-13
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    R
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                <label class="form-check-label" for="defaultCheck1">
+                    NC-17
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

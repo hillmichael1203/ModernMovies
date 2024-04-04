@@ -2,47 +2,44 @@
 @model ModernMoviesWeb.Pages.Account.RegisterModel
 @{
 }
+<h1>
+	REGISTER FOR A MODERN MOVIES&trade; ACCOUNT
+</h1>
+<h2>
+
+</h2>
 <form method="post">
 	<div class= "row m-2 text-danger" asp-validation-summary="All"></div>
-	<div class="row m-2">
-		<div class="col-2">
-			<label asp-for="newPerson.Name" class="form-label">Full Name:</label>
-		</div>
-		<div class="col-10">
-			<input asp-for="newPerson.Name" type="text" class="form-control"/>
+	<div class="row m-2 justify-content-center">
+		<div class="col-4">
+			<input asp-for="newPerson.Name" type="text" class="form-control" placeholder="Full Name"/>
 			<span asp-validation-for="newPerson.Name" class="text-danger"></span>
 		</div>
 	</div>
-	<div class="row m-2">
-		<div class="col-2">
-			<label asp-for="newPerson.Email" class="form-label">Email Address:</label>
-		</div>
-		<div class="col-10">
-			<input asp-for="newPerson.Email" type="email" class="form-control" />
+	<div class="row m-2 justify-content-center">
+		<div class="col-4">
+			<input asp-for="newPerson.Email" type="email" class="form-control" placeholder="Email Address" />
 			<span asp-validation-for="newPerson.Email" class="text-danger"></span>
 		</div>
 	</div>
-	<div class="row m-2">
-		<div class="col-2">
-			<label asp-for="newPerson.Password" class="form-label">Password:</label>
-		</div>
-		<div class="col-10">
-			<input asp-for="newPerson.Password" type="password" class="form-control" />
+	<div class="row m-2 justify-content-center">
+		<div class="col-4">
+			<input asp-for="newPerson.Password" type="password" class="form-control" placeholder="Password" />
 			<span asp-validation-for="newPerson.Password" class="text-danger"></span>
 		</div>
 	</div>
-	<div class="row m-2">
-		<div class="col-2">
-			<label asp-for="newPerson.PhoneNumber" class="form-label">Phone Number (Optional):</label>
-		</div>
-		<div class="col-10">
-			<input asp-for="newPerson.PhoneNumber" type="tel" class="form-control" />
+	<div class="row m-2 justify-content-center">
+		<div class="col-4">
+			<input asp-for="newPerson.PhoneNumber" type="tel" class="form-control" placeholder="Phone Number (Optional)"/>
 			<span asp-validation-for="newPerson.PhoneNumber" class="text-danger"></span>
 		</div>
 	</div>
-	<div class="row m-2">
-		<div class="col-2">
-			<button id="btnRegister" class="btn btn-primary">Submit</button>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-4">
+				<button id="btnRegister" class="btn btn-primary w-100">SUBMIT</button>
+			</div>
 		</div>
 	</div>
+	
 </form>

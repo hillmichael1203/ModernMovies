@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernMoviesWeb", "ModernMo
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ModernMoviesDB", "ModernMoviesDB\ModernMoviesDB.sqlproj", "{63CC17E3-CEFE-4147-A369-7B4499E8D068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernMoviesBusiness", "ModernMoviesBusiness\ModernMoviesBusiness.csproj", "{901B8548-FB0A-438B-B2B9-905482CC2B12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernMoviesBusiness", "ModernMoviesBusiness\ModernMoviesBusiness.csproj", "{901B8548-FB0A-438B-B2B9-905482CC2B12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -35,6 +35,7 @@ namespace ModernMoviesWeb.Pages.Account
 				string cmdText = @"UPDATE Person SET LastLoginTime = @lastLoginTime WHERE UserID = @userID";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@lastLoginTime", DateTime.Now.ToString());
+				cmd.Parameters.AddWithValue("userId", userId);
 				conn.Open();
 				cmd.ExecuteNonQuery();
 			}
@@ -58,7 +59,7 @@ namespace ModernMoviesWeb.Pages.Account
 						if (SecurityHelper.VerifyPassword(loginUser.Password, passwordHash))
 						{
 							UpdateLoginTime(reader.GetInt32(1));
-							return RedirectToPage("Index");
+							return RedirectToPage("Profile");
 						}
 						else
 						{

@@ -1,0 +1,30 @@
+﻿@page
+@model ModernMoviesWeb.Pages.Account.ProfileModel
+@{
+}
+<div class = "row m-2">
+	<div class="col-2">
+		<label>Full Name:</label>
+	</div>
+	<div class="col-10">
+		<label>@Model.profile.Name</label>
+	</div>
+	<div class="col-2">
+		<label>Email Address:</label>
+	</div>
+	<div class="col-10">
+		<label>@Model.profile.Email</label>
+	</div>
+	<div class="col-2">
+		<label>Last Login Time:</label>
+	</div>
+	<div class="col-10">
+		<label>@Model.profile.LastLoginTime</label>
+	</div>
+	<div class="col-2">
+		<label>Phone Number:</label>
+	</div>
+	<div class="col-10">
+		<label">@Model.profile.PhoneNumber</label>
+	</div>
+</div>
