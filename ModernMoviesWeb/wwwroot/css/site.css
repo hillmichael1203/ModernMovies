@@ -39,7 +39,7 @@ p{
     color: #e84a4a;
 }
 
-btn-secondary {
+.btn-secondary {
     background-color: lightgray;
     color: #e84a4a;
 }
@@ -74,14 +74,15 @@ btn-secondary {
     color: #e84a4a;
     background-color: white;
     border-radius: 30px;
-    margin-left:20px;
-    padding-left:10px;
-    padding-right:10px;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     font-weight: bold;
 }
 
 .nav-link {
     color: #e84a4a !important;
+    font-size: smaller;
 }
 
 .navbar{
