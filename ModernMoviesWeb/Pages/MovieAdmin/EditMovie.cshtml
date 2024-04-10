@@ -1,0 +1,52 @@
+﻿@page
+@model ModernMoviesWeb.Pages.MovieAdmin.EditMovieModel
+@{
+}
+<form method="post" class="form-group">
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="editedMovie.MovieName"></label>
+		</div>
+		<div class="col-10">
+			<input type="text" class="form-control" asp-for="editedMovie.MovieName" />
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="editedMovie.MovieDesc"></label>
+		</div>
+		<div class="col-10">
+			<textarea class="form-control" asp-for="editedMovie.MovieDesc"></textarea>
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="editedMovie.MinRuntime"></label>
+		</div>
+		<div class="col-10">
+			<input type="text" class="form-control" asp-for="editedMovie.MinRuntime" />
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="editedMovie.GenreID"></label>
+		</div>
+		<div class="col-10">
+			<select asp-for="editedMovie.GenreID" asp-items="@Model.Genres"></select>
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="editedMovie.RatingID"></label>
+		</div>
+		<div class="col-10">
+			<select asp-for="editedMovie.RatingID" asp-items="@Model.Ratings"></select>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<input type="submit" value="Save Changes" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
+

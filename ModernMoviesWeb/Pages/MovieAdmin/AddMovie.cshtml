@@ -1,0 +1,51 @@
+﻿@page
+@model ModernMoviesWeb.Pages.MovieAdmin.AddMovieModel
+@{
+}
+<form method="post" class="form-group">
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="newMovie.MovieName"></label>
+		</div>
+		<div class="col-10">
+			<input type="text" class="form-control" asp-for="newMovie.MovieName" />
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="newMovie.MovieDesc"></label>
+		</div>
+		<div class="col-10">
+			<textarea class="form-control" asp-for="newMovie.MovieDesc"></textarea>
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="newMovie.MinRuntime"></label>
+		</div>
+		<div class="col-10">
+			<input type="text" class="form-control" asp-for="newMovie.MinRuntime" />
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="newMovie.GenreID"></label>
+		</div>
+		<div class="col-10">
+			<select asp-for="newMovie.GenreID" asp-items="@Model.Genres"></select>
+		</div>
+	</div>
+	<div class"row m-2">
+		<div class="col-2">
+			<label asp-for="newMovie.RatingID"></label>
+		</div>
+		<div class="col-10">
+			<select asp-for="newMovie.RatingID" asp-items="@Model.Ratings"></select>
+		</div>
+	</div>
+	<div class="row m-2">
+		<div class="col-2">
+			<button id="btnAdd" class="btn btn-primary">Add New Movie</button>
+		</div>
+	</div>
+</form>
