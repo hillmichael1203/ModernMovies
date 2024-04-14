@@ -27,6 +27,10 @@ p{
     color: #e84a4a;
 }
 
+.blackable {
+    color: black;
+}
+
 /*setting primary button colors*/
 .btn {
     border-radius: 30px;
@@ -44,15 +48,22 @@ p{
     color: #e84a4a;
 }
 
-.btn-primary:hover {
-    background-color: #cb2727;
+.btn-primary:hover{
+    background-color: #fe7e7e;
+    color: white;
+    border-radius: 30px;
+    border-width: 0px;
+}
+
+.btn-primary:active, .btn-primary:visited, btn-primary:focus, .btn:active, .btn:focus{
+    background-color: #e84a4a !important;
     color: white;
     border-radius: 30px;
     border-width: 0px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #e84a4a;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #e84a4a ;
 }
 
 .form-check-input {

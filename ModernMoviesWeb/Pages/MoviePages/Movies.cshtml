@@ -2,93 +2,83 @@
 @model ModernMoviesWeb.Pages.MoviePages.MoviesModel
 @{
 }
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    MOVIE OPTIONS
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasGenre" aria-controls="offcanvasGenre">
+    GENRE FILTERS
 </button>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRating" aria-controls="offcanvasRating">
+    RATING FILTERS
+</button>
+
+<!--Radio Buttons for Sorting Options-->
+<h2 class="pinkable left-header">
+    SORT BY:<hr />
+</h2>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+    <label class="pinkable form-check-label" for="exampleRadios1">
+        A TO Z
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+    <label class="pinkable form-check-label" for="exampleRadios2">
+        RELEASE DATE
+    </label>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasGenre" aria-labelledby="offcanvasGenreLabel">
     <div class="offcanvas-header pinkable">
-        <h2 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h2>
+        <h2 class="offcanvas-title" id="offcanvasGenreLabel">Offcanvas</h2>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-
-        <!--Radio Buttons for Sorting Options-->
-        <h2 class="pinkable left-header">
-            SORT BY:<hr/>
-        </h2>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-                A TO Z
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-                RELEASE DATE
-            </label>
-        </div>
+    <div class="offcanvas-body overflow-scroll">
+        
 
         <!--Checkboxes for Category Options-->
         <div class="position-absolute bottom-90">
-            <h2 class="pinkable left-header">
-                CATEGORIES:<hr />
-            </h2>
             <h3 class="pinkable left-header">
+                CATEGORIES:
+            </h3>
+            <h4 class="pinkable left-header">
                 GENRE:
-            </h3>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    Action
+            </h4>
+            @for (int i = 0; i < Model.Genres.Count; i++)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                    <label class="form-check-label pinkable" for="defaultCheck1">
+                    @Model.Genres[i]
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    Comedy
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    Drama
-                </label>
-            </div>
-            <h3 class="pinkable left-header">
+            }
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRating" aria-labelledby="offcanvasRatingLabel">
+    <div class="offcanvas-header pinkable">
+        <h2 class="offcanvas-title" id="offcanvasRatingLabel">Offcanvas</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body overflow-scroll">
+
+
+        <!--Checkboxes for Category Options-->
+        <div class="position-absolute bottom-90">
+            <h4 class="pinkable left-header">
                 AGE RATING:
-            </h3>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    G
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    PG
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    PG-13
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    R
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                <label class="form-check-label" for="defaultCheck1">
-                    NC-17
-                </label>
-            </div>
+            </h4>
+            @for (int i = 0; i < Model.Ratings.Count; i++)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                    <label class="form-check-label pinkable" for="defaultCheck1">
+                        @Model.Ratings[i]
+                    </label>
+                </div>
+            }
         </div>
     </div>
 </div>

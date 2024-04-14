@@ -2,29 +2,28 @@
 @model ModernMoviesWeb.Pages.Account.LoginModel
 @{
 }
+<h1>
+	SIGN INTO YOUR MODERN MOVIES&trade; ACCOUNT
+</h1>
 <form method="POST">
 	<div class="row m-2 text-danger" asp-validation-summary="All"></div>
-	<div class="row m-2">
-		<div class = "col-4">
-			<label class="form-label" asp-for="loginUser.Email">Email Address:</label>
-		</div>
-		<div class = "col-8">
-			<input type="email" class = "form-control" asp-for="loginUser.Email"/>
-			<span class= "text-danger" asp-validation-for="loginUser.Email"></span>
+	<div class="row m-2 justify-content-center">
+		<div class="col-4">
+			<input asp-for="loginUser.Email" type="email" class="form-control" placeholder="Email Address" />
+			<span asp-validation-for="loginUser.Email" class="text-danger"></span>
 		</div>
 	</div>
-	<div class = "row m-2">
-		<div class = "col-4">
-			<label class="form-label" asp-for="loginUser.Password">Password:</label>	
-		</div>
-		<div class = "col-8">
-			<input type="password" class="form-control" asp-for="loginUser.Password"/>
-			<span class="text-danger" asp-validation-for="loginUser.Password"></span>
+	<div class="row m-2 justify-content-center">
+		<div class="col-4">
+			<input asp-for="loginUser.Password" type="password" class="form-control" placeholder="Password" />
+			<span asp-validation-for="loginUser.Password" class="text-danger"></span>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-2">
-			<button itemid="btnLogin" class="btn btn-primary">SIGN IN</button>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-4">
+				<button id="btnLogin" class="btn btn-primary w-100">LOG IN</button>
+			</div>
 		</div>
 	</div>
 </form>
