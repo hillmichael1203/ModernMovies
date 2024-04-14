@@ -25,18 +25,46 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/MoviePages/Movies">MOVIES</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Account/Login">SIGN IN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Account/Register">REGISTER</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/MovieAdmin/AddMovie">ADD MOVIE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/MovieAdmin/ViewMovies">VIEW MOVIES</a>
-                        </li>
+                        <!-- Conditionally Display this only if user is not signed in -->
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Account/Login">SIGN IN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Account/Register">REGISTER</a>
+                            </li>
+                        }
+
+                        <!-- Conditionally display this based on whether the user is an admin -->
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/MovieAdmin/AddMovie">ADD MOVIE</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/MovieAdmin/ViewMovies">VIEW MOVIES</a>
+                            </li>
+                        }
+
+                        <!-- Sign out button if logged in -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-page="/Account/Logout">
+                                    <button type="submit" class="nav-link btn btn-link" style="background-color: transparent; border: none;">SIGN OUT</button>
+                                </form>
+                            </li>
+                        }
+
+                        <!-- Show profile button if logged in -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Account/Profile">PROFILE</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

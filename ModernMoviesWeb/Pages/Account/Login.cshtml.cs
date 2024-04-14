@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using ModernMoviesBusiness;
 using ModernMoviesWeb.Pages.Model;
+using System.Security.Claims;
 
 namespace ModernMoviesWeb.Pages.Account
 {
@@ -40,7 +43,8 @@ namespace ModernMoviesWeb.Pages.Account
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				string cmdText = "SELECT Password, UserID FROM Person WHERE Email=@email";
+				string cmdText = "SELECT Password, UserID, Name, TypeName FROM Person " +
+					"INNER JOIN [AccountType] ON Person.TypeId = [AccountType].TypeId WHERE Email=@email";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@email", loginUser.Email);
 				conn.Open();
@@ -60,6 +64,27 @@ namespace ModernMoviesWeb.Pages.Account
 						{
 							int userID = reader.GetInt32(1);
 							UpdateLastLoginTime(userID);
+
+							string name = reader.GetString(2);
+							string roleName = reader.GetString(3);
+
+							//1. Create a list of claims
+							Claim emailClaim = new Claim(ClaimTypes.Email, loginUser.Email);
+							Claim nameClaim = new Claim(ClaimTypes.Name, name);
+							Claim roleClaim = new Claim(ClaimTypes.Role, roleName);
+
+							List<Claim> claims = new List<Claim> { emailClaim, nameClaim, roleClaim };
+
+							//2. Create a ClaimsIdentity
+							ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+							//3. Create a ClaimsPrinciple
+							ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+
+							//4. Create a authentication cookie
+							HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+
 							return true;
 						}
 						else
