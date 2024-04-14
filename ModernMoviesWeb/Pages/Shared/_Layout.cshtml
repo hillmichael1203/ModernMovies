@@ -37,7 +37,7 @@
                         }
 
                         <!-- Conditionally display this based on whether the user is an admin -->
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-page="/MovieAdmin/AddMovie">ADD MOVIE</a>

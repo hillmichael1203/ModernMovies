@@ -66,12 +66,12 @@ namespace ModernMoviesWeb.Pages.Account
 							UpdateLastLoginTime(userID);
 
 							string name = reader.GetString(2);
-							string roleName = reader.GetString(3);
+							string typeName = reader.GetString(3);
 
 							//1. Create a list of claims
 							Claim emailClaim = new Claim(ClaimTypes.Email, loginUser.Email);
 							Claim nameClaim = new Claim(ClaimTypes.Name, name);
-							Claim roleClaim = new Claim(ClaimTypes.Role, roleName);
+							Claim roleClaim = new Claim(ClaimTypes.Role, typeName);
 
 							List<Claim> claims = new List<Claim> { emailClaim, nameClaim, roleClaim };
 
