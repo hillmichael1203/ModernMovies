@@ -3,31 +3,79 @@
 @{
 }
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasGenre" aria-controls="offcanvasGenre">
-    GENRE FILTERS
-</button>
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRating" aria-controls="offcanvasRating">
-    RATING FILTERS
-</button>
-
 <!--Radio Buttons for Sorting Options-->
-<h2 class="pinkable left-header">
-    SORT BY:<hr />
-</h2>
-<div class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-    <label class="pinkable form-check-label" for="exampleRadios1">
-        A TO Z
-    </label>
+<h3 class="pinkable">
+    SORT BY:
+</h3>
+<div class="d-flex justify-content-center">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sort" id="atoz" value="option1" checked>
+        <label class="pinkable form-check-label" for="atoz">
+            A TO Z
+        </label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="sort" id="releaseDate" value="option2">
+        <label class="pinkable form-check-label" for="releaseDate">
+            RELEASE DATE
+        </label>
+    </div>
 </div>
-<div class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-    <label class="pinkable form-check-label" for="exampleRadios2">
-        RELEASE DATE
-    </label>
+<!--Buttons to open filter flyouts-->
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-4 p-2">
+            <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasGenre" aria-controls="offcanvasGenre">
+                GENRE FILTERS
+            </button>
+        </div>
+        <div class="col-4 p-2">
+            <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRating" aria-controls="offcanvasRating">
+                RATING FILTERS
+            </button>
+        </div>
+    </div>
 </div>
 
+<div class="container overflow-hidden justify-content-center">
+    <div class="row gx-3 justify-content-center">
+        @foreach (var movie in Model.Movies)
+        {
+            
+
+            <div class="col-4 p-3 justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                        <div class="row m-1 justify-content-center">
+                            <label class="pinkable form-label text-center ">@movie.MovieName</label>
+                        </div>
+                        <div class="row m-1 justify-content-center">
+                            <label class="form-label text-center pinkable">@movie.MinRuntime</label>
+                        </div>
+                        <div class="row m-1 justify-content-center">
+                            <label class="form-label text-center pinkable">@Model.Ratings[movie.RatingID]</label>
+                        </div>
+                        <div class="row m-1 justify-content-center">
+                            <label class="form-label text-center pinkable">@Model.Genres[movie.GenreID]</label>
+                        </div>
+                        <div class="row justify-content-center ">
+                            <a class="btn btn-primary text-center">Book Tickets</a>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        }
+    </div>
+   
+</div>
+
+
+
+
+<!--filter flyouts-->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasGenre" aria-labelledby="offcanvasGenreLabel">
     <div class="offcanvas-header pinkable">
         <h2 class="offcanvas-title" id="offcanvasGenreLabel">Offcanvas</h2>
@@ -39,11 +87,8 @@
         <!--Checkboxes for Category Options-->
         <div class="position-absolute bottom-90">
             <h3 class="pinkable left-header">
-                CATEGORIES:
+                GENRE FILTERS:
             </h3>
-            <h4 class="pinkable left-header">
-                GENRE:
-            </h4>
             @for (int i = 0; i < Model.Genres.Count; i++)
             {
                 <div class="form-check">
@@ -67,9 +112,9 @@
 
         <!--Checkboxes for Category Options-->
         <div class="position-absolute bottom-90">
-            <h4 class="pinkable left-header">
-                AGE RATING:
-            </h4>
+            <h3 class="pinkable left-header">
+                AGE RATING FILTERS:
+            </h3>
             @for (int i = 0; i < Model.Ratings.Count; i++)
             {
                 <div class="form-check">
