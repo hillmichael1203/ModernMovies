@@ -43,6 +43,8 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			}
 			else
 			{
+				PopulateGenreDDL();
+				PopulateRatingDDL();
 				return Page();
 			}
 		}
