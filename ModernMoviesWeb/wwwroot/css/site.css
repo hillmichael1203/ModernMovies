@@ -19,7 +19,7 @@ h1, h2, h3{
     text-align:left;
 }
 
-p{
+p, .span{
     color:white;
 }
 
@@ -104,6 +104,11 @@ p{
     font-weight: bold;
     color: white !important;
     font-size: 28px;
+}
+
+/*card*/
+.card {
+    background-color: #404040;
 }
 
 html {

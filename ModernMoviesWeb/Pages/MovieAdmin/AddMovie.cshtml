@@ -3,49 +3,44 @@
 @{
 }
 <form method="post" class="form-group">
-	<div class"row m-2">
-		<div class="col-2">
-			<label asp-for="newMovie.MovieName"></label>
-		</div>
+	<div class="row m-2 text-danger" asp-validation-summary="All"></div>
+	<div class="row m-2 justify-content-center">
 		<div class="col-10">
-			<input type="text" class="form-control" asp-for="newMovie.MovieName" />
+			<input type="text" class="form-control" asp-for="newMovie.MovieName" placeholder="Movie Name" />
 		</div>
 	</div>
-	<div class"row m-2">
-		<div class="col-2">
-			<label asp-for="newMovie.MovieDesc"></label>
-		</div>
+	<div class="row m-2 justify-content-center">
 		<div class="col-10">
-			<textarea class="form-control" asp-for="newMovie.MovieDesc"></textarea>
+			<textarea class="form-control" asp-for="newMovie.MovieDesc" placeholder="Movie Description"></textarea>
 		</div>
 	</div>
-	<div class"row m-2">
-		<div class="col-2">
-			<label asp-for="newMovie.MinRuntime"></label>
-		</div>
+	<div class="row m-2 justify-content-center">
 		<div class="col-10">
-			<input type="text" class="form-control" asp-for="newMovie.MinRuntime" />
+			<input type="text" class="form-control" asp-for="newMovie.MinRuntime" placeholder="Runtime (Minutes)" />
 		</div>
 	</div>
-	<div class"row m-2">
-		<div class="col-2">
+	<div class="d-flex justify-content-center">
+		<div class="px-3 py-1">
 			<label asp-for="newMovie.GenreID"></label>
 		</div>
-		<div class="col-10">
-			<select asp-for="newMovie.GenreID" asp-items="@Model.Genres"></select>
+		<div class="px-3 py-1">
+			<select asp-for="newMovie.GenreID" asp-items="@Model.Genres"> </select>
 		</div>
 	</div>
-	<div class"row m-2">
-		<div class="col-2">
+	<div class="d-flex justify-content-center">
+		<div class="px-3 py-2">
 			<label asp-for="newMovie.RatingID"></label>
 		</div>
-		<div class="col-10">
+		<div class="px-3 py-2">
 			<select asp-for="newMovie.RatingID" asp-items="@Model.Ratings"></select>
 		</div>
 	</div>
-	<div class="row m-2">
-		<div class="col-2">
-			<button id="btnAdd" class="btn btn-primary">Add New Movie</button>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-2">
+				<button id="btnAdd" class="btn btn-primary">ADD NEW MOVIE</button>
+			</div>
 		</div>
 	</div>
+	
 </form>
