@@ -30,7 +30,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 		{
 			using(SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				string cmdText = "SELECT MovieName, MovieDesc, MinRuntime, RatingID, GenreID, MovieID FROM Movie WHERE GenreID=@genreID";
+				string cmdText = "SELECT MovieName, MovieDesc, MinRuntime, RatingID, GenreID, MovieID, Image, ReleaseDate FROM Movie WHERE GenreID=@genreID";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@genreID", id);
 				conn.Open();
@@ -46,6 +46,8 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 						movie.RatingID = reader.GetInt32(3);
 						movie.GenreID = reader.GetInt32(4);
 						movie.MovieID = reader.GetInt32(5);
+						movie.Image = reader.GetString(6);
+						movie.ReleaseDate = reader.GetDateTime(7);
 						Movies.Add(movie);
 					}
 				}

@@ -45,7 +45,7 @@
 
             <div class="col-4 p-3 justify-content-center">
                 <div class="card c" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img class="card-img-top" src="@movie.Image" alt="Card image cap">
                     <div class="card-body">
                         <div class="row m-1 justify-content-center">
                             <label class="form-label text-center ">@movie.MovieName</label>
@@ -54,10 +54,10 @@
                             <label class="form-label text-center">@movie.MinRuntime</label>
                         </div>
                         <div class="row m-1 justify-content-center">
-                            <label class="form-label text-center">@Model.Ratings[movie.RatingID]</label>
+                            <label class="form-label text-center">@Model.Ratings[movie.RatingID].RatingName</label>
                         </div>
                         <div class="row m-1 justify-content-center">
-                            <label class="form-label text-center">@Model.Genres[movie.GenreID]</label>
+                            <label class="form-label text-center">@Model.Genres[movie.GenreID].Genre</label>
                         </div>
                         <div class="row justify-content-center ">
                             <a class="btn btn-primary text-center">Book Tickets</a>
@@ -89,14 +89,11 @@
             <h3 class="pinkable left-header">
                 GENRE FILTERS:
             </h3>
-            @for (int i = 0; i < Model.Genres.Count; i++)
+            @foreach(GenreInfo genre in Model.Genres)
             {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                    <label class="form-check-label pinkable" for="defaultCheck1">
-                    @Model.Genres[i]
-                </label>
-            </div>
+                <input type="checkbox" value="@genre.GenreID" checked="@genre.IsSelected name="selectedGenreIDs"/>
+                <label class="pinkable form-label-check">@genre.Genre</label>
+                <br/>
             }
         </div>
     </div>
@@ -115,14 +112,11 @@
             <h3 class="pinkable left-header">
                 AGE RATING FILTERS:
             </h3>
-            @for (int i = 0; i < Model.Ratings.Count; i++)
+            @foreach (RatingInfo rating in Model.Ratings)
             {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                    <label class="form-check-label pinkable" for="defaultCheck1">
-                        @Model.Ratings[i]
-                    </label>
-                </div>
+                <input type="checkbox" value="@rating.RatingID" checked="@rating.IsSelected name="selectedRatingIDs"/>
+                <label class="pinkable form-label-check">@rating.RatingName</label>
+                <br/>
             }
         </div>
     </div>

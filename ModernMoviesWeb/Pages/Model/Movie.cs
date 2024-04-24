@@ -20,6 +20,14 @@ namespace ModernMoviesWeb.Pages.Model
 		
 		[Required]
 		public int GenreID { get; set; }
+
+		[Required]
+		[Display(Name = "Image Link")]
+		public string Image {  get; set; }
+
+		[Required]
+		[Display(Name = "Release Date")]
+		public DateTime ReleaseDate { get; set; }
 		
 	}
 }

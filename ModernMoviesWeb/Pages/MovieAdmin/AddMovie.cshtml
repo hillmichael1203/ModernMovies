@@ -16,12 +16,25 @@
 	</div>
 	<div class="row m-2 justify-content-center">
 		<div class="col-10">
+			<input type="text" class="form-control" asp-for="newMovie.Image" placeholder="Image Link" />
+		</div>
+	</div>
+	<div class="row m-2 justify-content-center">
+		<div class="col-10">
 			<label class="text-center" asp-for=" newMovie.MinRuntime"></label>
 		</div>
 	</div>
 	<div class="row m-2 justify-content-center">
 		<div class="col-10">
-			<input type="text" class="form-control text-center" asp-for="newMovie.MinRuntime" placeholder="Runtime (Minutes)" />
+			<input type="text" class="form-control" asp-for="newMovie.MinRuntime" placeholder="Runtime (Minutes)" />
+		</div>
+	</div>
+	<div class="row m-2 justify-content-center">
+		<div class="col-10">
+			<label class="text-center" asp-for="newMovie.ReleaseDate"></label>
+		</div>
+		<div class="col-10">
+			<input type="date" class="form-control" asp-for="newMovie.ReleaseDate"/>
 		</div>
 	</div>
 	<div class="d-flex justify-content-center">

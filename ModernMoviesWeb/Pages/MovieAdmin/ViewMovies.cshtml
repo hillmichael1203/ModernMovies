@@ -19,6 +19,11 @@
 		<div class="row m-2 border">
 			<div class="row m-2">
 				<div class="col-2">
+					<img src="@movie.Image" class="img-rounded" alt="@movie.MovieName">
+				</div>
+			</div>
+			<div class="row m-2">
+				<div class="col-2">
 					<label class="form-label" asp-for="@movie.MovieName"></label>
 				</div>
 				<div class="col-10">
@@ -39,6 +44,14 @@
 				</div>
 				<div class="col-10">
 					<label class="form-label">@movie.MinRuntime</label>
+				</div>
+			</div>
+			<div class="row m-2">
+				<div class="col-2">
+					<label class="form-label" asp-for="@movie.ReleaseDate"></label>
+				</div>
+				<div class="col-10">
+					<label class="form-label">@movie.ReleaseDate.ToShortDateString()</label>
 				</div>
 			</div>
 			<div class="row m-2">

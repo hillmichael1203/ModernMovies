@@ -27,13 +27,15 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 				using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 				{
 					string cmdText = "UPDATE Movie SET MovieName=@movieName, MovieDesc=@movieDesc, MinRuntime=@minRuntime, RatingID=@ratingID, " +
-						"GenreID=@genreID WHERE MovieID = @movieID";
+						"GenreID=@genreID, Image=@image, ReleaseDate=@releaseDate WHERE MovieID = @movieID";
 					SqlCommand cmd = new SqlCommand(cmdText, conn);
 					cmd.Parameters.AddWithValue("@movieName", editedMovie.MovieName);
 					cmd.Parameters.AddWithValue("@movieDesc", editedMovie.MovieDesc);
 					cmd.Parameters.AddWithValue("@minRuntime", editedMovie.MinRuntime);
 					cmd.Parameters.AddWithValue("@ratingID", editedMovie.RatingID);
 					cmd.Parameters.AddWithValue("@genreID", editedMovie.GenreID);
+					cmd.Parameters.AddWithValue("@image", editedMovie.Image);
+					cmd.Parameters.AddWithValue("releaseDate", editedMovie.ReleaseDate);
 					cmd.Parameters.AddWithValue("@movieID", id);
 
 					conn.Open();
@@ -97,7 +99,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				string cmdText = "SELECT MovieID, MovieName, MovieDesc, MinRuntime, RatingID, GenreID FROM Movie WHERE MovieID = @movieID";
+				string cmdText = "SELECT MovieID, MovieName, MovieDesc, MinRuntime, RatingID, GenreID, Image, ReleaseDate FROM Movie WHERE MovieID = @movieID";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@movieId", id);
 				conn.Open();
@@ -111,6 +113,8 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 					editedMovie.MinRuntime = reader.GetInt32(3);
 					editedMovie.RatingID = reader.GetInt32(4);
 					editedMovie.GenreID = reader.GetInt32(5);
+					editedMovie.Image = reader.GetString(6);
+					editedMovie.ReleaseDate = reader.GetDateTime(7);
 				}
 			}
 		}
