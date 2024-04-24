@@ -37,7 +37,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 					cmd.Parameters.AddWithValue("@ratingID", editedMovie.RatingID);
 					cmd.Parameters.AddWithValue("@genreID", editedMovie.GenreID);
 					cmd.Parameters.AddWithValue("@image", editedMovie.Image);
-					cmd.Parameters.AddWithValue("releaseDate", editedMovie.ReleaseDate);
+					cmd.Parameters.AddWithValue("@releaseDate", editedMovie.ReleaseDate);
 					cmd.Parameters.AddWithValue("@movieID", id);
 
 					conn.Open();
