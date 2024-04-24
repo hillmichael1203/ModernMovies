@@ -34,7 +34,7 @@ namespace ModernMoviesWeb.Pages.Account
 				}
 				else
 				{
-					ModelState.AddModelError("newPerson.Password", "Password must be 6-10 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
+					ModelState.AddModelError("newPerson.Password", "Password must be 10-16 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
 					return Page();
 				}
 			}
@@ -46,7 +46,7 @@ namespace ModernMoviesWeb.Pages.Account
 
 		private bool IsPasswordValid(string password)
 		{
-			var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{6,10}$");
+			var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{10,16}$");
 
 			return regex.IsMatch(password);
 		}
