@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +9,8 @@ using System.Data.SqlTypes;
 
 namespace ModernMoviesWeb.Pages.MovieAdmin
 {
+	[Authorize(Roles = "Administrator")]
+	[BindProperties]
     public class AddMovieModel : PageModel
     {
 		public Movie newMovie { get; set; } = new Movie();
@@ -27,17 +29,14 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			{
 				using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 				{
-					string cmdText = "INSERT INTO Movie(MovieName, MovieDesc, MinRuntime, RatingID, GenreID, Image, ReleaseDate) " +
-						"VALUES (@movieName, @movieDesc, @minRuntime, @ratingID, @genreID, @image, @releaseDate)";
+					string cmdText = "INSERT INTO Movie(MovieName, MovieDesc, MinRuntime, RatingID, GenreID) " +
+						"VALUES (@movieName, @movieDesc, @minRuntime, @ratingID, @genreID)";
 					SqlCommand cmd = new SqlCommand(cmdText, conn);
 					cmd.Parameters.AddWithValue("@movieName", newMovie.MovieName);
 					cmd.Parameters.AddWithValue("@movieDesc", newMovie.MovieDesc);
 					cmd.Parameters.AddWithValue("@minRuntime", newMovie.MinRuntime);
 					cmd.Parameters.AddWithValue("@ratingID", newMovie.RatingID);
 					cmd.Parameters.AddWithValue("@genreID", newMovie.GenreID);
-					cmd.Parameters.AddWithValue("@image", newMovie.Image);
-					cmd.Parameters.AddWithValue("@releaseDate", newMovie.ReleaseDate);
-
 
 					conn.Open();
 					cmd.ExecuteNonQuery();

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -7,9 +8,10 @@ using System.Security.Claims;
 
 namespace ModernMoviesWeb.Pages.Account
 {
-    public class ProfileModel : PageModel
+	[Authorize(Roles = "Customer,Employee,Administrator")]
+	[BindProperties]
+	public class ProfileModel : PageModel
     {
-		[BindProperty]
 		public UserProfile profile { get; set; } = new UserProfile();
         public void OnGet()
         {
