@@ -73,7 +73,7 @@ namespace ModernMoviesWeb.Pages.Account
 							Claim nameClaim = new Claim(ClaimTypes.Name, name);
 							Claim roleClaim = new Claim(ClaimTypes.Role, typeName);
 
-							List<Claim> claims = new List<Claim> { emailClaim, nameClaim, roleClaim, IDClaim };
+							List<Claim> claims = new List<Claim> { emailClaim, nameClaim, roleClaim };
 
 							//2. Create a ClaimsIdentity
 							ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

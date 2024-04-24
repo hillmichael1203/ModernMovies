@@ -29,14 +29,15 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			{
 				using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 				{
-					string cmdText = "INSERT INTO Movie(MovieName, MovieDesc, MinRuntime, RatingID, GenreID) " +
-						"VALUES (@movieName, @movieDesc, @minRuntime, @ratingID, @genreID)";
+					string cmdText = "INSERT INTO Movie(MovieName, MovieDesc, MinRuntime, RatingID, GenreID, Image) " +
+						"VALUES (@movieName, @movieDesc, @minRuntime, @ratingID, @genreID, @image)";
 					SqlCommand cmd = new SqlCommand(cmdText, conn);
 					cmd.Parameters.AddWithValue("@movieName", newMovie.MovieName);
 					cmd.Parameters.AddWithValue("@movieDesc", newMovie.MovieDesc);
 					cmd.Parameters.AddWithValue("@minRuntime", newMovie.MinRuntime);
 					cmd.Parameters.AddWithValue("@ratingID", newMovie.RatingID);
 					cmd.Parameters.AddWithValue("@genreID", newMovie.GenreID);
+					cmd.Parameters.AddWithValue("@image", newMovie.Image);
 
 					conn.Open();
 					cmd.ExecuteNonQuery();
