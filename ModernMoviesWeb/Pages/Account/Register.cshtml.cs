@@ -19,22 +19,14 @@ namespace ModernMoviesWeb.Pages.Account
         {
             if(ModelState.IsValid)
             {
-				if (IsPasswordValid(newPerson.Password))
+				if (EmailDoesNotExist(newPerson.Email))
 				{
-					if (EmailDoesNotExist(newPerson.Email))
-					{
-						RegisterUser();
-						return RedirectToPage("Login");
-					}
-					else
-					{
-						ModelState.AddModelError("RegisterError", "The email has already been used. Please try a different one.");
-						return Page();
-					}
+					RegisterUser();
+					return RedirectToPage("Login");
 				}
 				else
 				{
-					ModelState.AddModelError("newPerson.Password", "Password must be 10-16 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
+					ModelState.AddModelError("RegisterError", "The email has already been used. Please try a different one.");
 					return Page();
 				}
 			}
@@ -43,13 +35,6 @@ namespace ModernMoviesWeb.Pages.Account
                 return Page();
             }
         }
-
-		private bool IsPasswordValid(string password)
-		{
-			var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{10,16}$");
-
-			return regex.IsMatch(password);
-		}
 
 		private bool EmailDoesNotExist(string email)
 		{

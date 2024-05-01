@@ -124,3 +124,36 @@ body {
 label {
     color: white;
 }
+
+.carousel {
+    width: auto; /* Adjust as needed */
+    /* Adjust as needed */
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner img {
+    margin: auto;
+    position:relative;
+}
+
+.carousel-crop {
+    position: absolute;
+    object-fit: contain;
+    height: 720px;
+    top: 300px;
+    z-index: 2;
+}
+
+.carousel-blur {
+    position: relative;
+    object-fit: fill;
+    top: 300px;
+    z-index: 1;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+}
+
+.relative{
+    position:relative;
+}

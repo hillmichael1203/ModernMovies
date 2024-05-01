@@ -27,8 +27,6 @@ namespace ModernMoviesWeb.Pages.Account
 		{
 			if (ModelState.IsValid)
 			{
-				if (IsPasswordValid(changePassword.NewPassword))
-				{
 					using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 					{
 						string cmdText = "SELECT Password FROM Person WHERE UserID=@userID";
@@ -70,23 +68,10 @@ namespace ModernMoviesWeb.Pages.Account
 				}
 				else
 				{
-					ModelState.AddModelError("newPerson.Password", "Password must be 10-16 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
-					return Page();
-				}
-				}
-				else
-				{
 					return Page();
 				}
 
 			}
-
-		private bool IsPasswordValid(string password)
-		{
-			var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{10,16}$");
-
-			return regex.IsMatch(password);
-		}
 
 		private void ChangePassword(int id)
 		{
