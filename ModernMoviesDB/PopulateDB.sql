@@ -15,14 +15,6 @@ INSERT [dbo].[AccountType] ([TypeID], [TypeName]) VALUES (1, N'Employee')
 GO
 INSERT [dbo].[AccountType] ([TypeID], [TypeName]) VALUES (2, N'Administrator')
 GO
-SET IDENTITY_INSERT [dbo].[Person] ON 
-GO
-INSERT [dbo].[Person] ([UserID], [Name], [Email], [Password], [PhoneNumber], [TypeID], [LastLoginTime]) VALUES (1, N'Test', N'test@test.test', N'test', N'1234567890', 2, CAST(N'2024-03-27T14:28:27.000' AS DateTime))
-GO
-INSERT [dbo].[Person] ([UserID], [Name], [Email], [Password], [PhoneNumber], [TypeID], [LastLoginTime]) VALUES (2, N'bazinga', N'baz@ing.a', N'T*gJ3Kjv''-b$f6A', N'000-000-0000', 2, CAST(N'2024-03-27T14:55:36.000' AS DateTime))
-GO
-SET IDENTITY_INSERT [dbo].[Person] OFF
-GO
 INSERT [dbo].[Rating] ([RatingID], [RatingName]) VALUES (0, N'G')
 GO
 INSERT [dbo].[Rating] ([RatingID], [RatingName]) VALUES (1, N'PG')
