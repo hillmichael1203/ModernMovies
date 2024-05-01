@@ -17,6 +17,13 @@
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="https://via.placeholder.com/800x400?text=Movie+Placeholder" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Movie Title</h5>
+                <p>Some description about the movie</p>
+            </div>
+        </div>
         @foreach (var movie in Model.Movies)
         {
             <div class="carousel-item">
