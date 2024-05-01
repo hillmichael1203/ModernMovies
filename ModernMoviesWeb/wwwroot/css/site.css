@@ -132,28 +132,42 @@ label {
     position: relative;
 }
 
-.carousel-inner img {
-    margin: auto;
-    position:relative;
+.carousel-inner {
+    height: 900px;
 }
 
 .carousel-crop {
     position: absolute;
     object-fit: contain;
     height: 720px;
-    top: 300px;
     z-index: 2;
 }
 
 .carousel-blur {
     position: relative;
-    object-fit: fill;
-    top: 300px;
+    object-fit: cover;
+    height: 740px;
     z-index: 1;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
+    top: -720px;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    height: 720px
 }
 
 .relative{
     position:relative;
+}
+
+.carousel-caption{
+    top: -720px;
+    left: 0px;
+    z-index: 3;
+}
+
+.carousel-control-prev{
+    z-index: 3;
+}
+
+.carousel-control-next {
+    z-index: 3;
 }

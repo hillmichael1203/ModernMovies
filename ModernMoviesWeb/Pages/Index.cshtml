@@ -10,20 +10,23 @@
 </div>
 
 <!-- Carousel -->
-<div id="carouselExampleCaptions" class="carousel slide relative"    >
-    <div class="carousel-inner relative">
+<div id="carouselExampleCaptions" class="carousel slide"    >
+    <div class="carousel-inner">
         @foreach (var movie in Model.Movies )
         {
             <div class="carousel-item relative">
-                <img class="d-block w-100 carousel-crop relative" src="@movie.Image" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
+                <div class="relative">
+                    <img class="d-block w-100 carousel-crop relative" src="@movie.Image" alt="Second slide">
+                </div>
+                <div class="relative">
+                    <img class="d-block w-100 carousel-blur relative" src="@movie.Image" alt="Second slide">
+                </div>
+                <div class="carousel-caption relative">
                     <h5>@movie.MovieName</h5>
                     <p>@movie.MovieDesc</p>
                 </div>
             </div>
-            <div class="carousel-item relative">
-                <img class="d-block w-100 carousel-blur relative" src="@movie.Image" alt="Second slide">
-             </div>
+            
         }
         <!-- Repeats for each movie in database -->
     </div>
