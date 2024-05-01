@@ -19,6 +19,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 		public int SelectedGenreId { get; set; }
         public void OnGet()
         {
+			PopulateMovie(0);
 			PopulateGenreDDL();
         }
 

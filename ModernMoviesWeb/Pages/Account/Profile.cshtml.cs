@@ -23,7 +23,7 @@ namespace ModernMoviesWeb.Pages.Account
 			string email = HttpContext.User.FindFirstValue(ClaimTypes.Email);
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				string cmdText = "SELECT Name, Email, PhoneNumber, LastLoginTime FROM Person WHERE Email=@email";
+				string cmdText = "SELECT Name, Email, PhoneNumber, LastLoginTime, UserID FROM Person WHERE Email=@email";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@email", email);
 				conn.Open();
@@ -35,6 +35,7 @@ namespace ModernMoviesWeb.Pages.Account
 					profile.Email = reader.GetString(1);
 					profile.PhoneNumber = reader.GetString(2);
 					profile.LastLoginTime = reader.GetDateTime(3);
+					profile.PersonId = reader.GetInt32(4);
 				}
 			}
 		}

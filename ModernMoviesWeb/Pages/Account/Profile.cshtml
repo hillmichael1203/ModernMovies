@@ -1,42 +1,49 @@
 ﻿@page
 @model ModernMoviesWeb.Pages.Account.ProfileModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "PROFILE";
 }
-<h2>@ViewData["Title"]</h2>
+<h1>@ViewData["Title"]</h1>
 
-<div class="row m-2">
+<div class="row m-2 justify-content-center">
     <div class="col-2">
         <label>Name:</label>
     </div>
-    <div class="col-10">
+    <div class="col-2">
         <span class="span">@Model.profile.Name</span>
     </div>
 </div>
 
-<div class="row m-2">
+<div class="row m-2 justify-content-center">
     <div class="col-2">
         <label>Email:</label>
     </div>
-    <div class="col-10">
+    <div class="col-2">
         <span class="span">@Model.profile.Email</span>
     </div>
 </div>
 
-<div class="row m-2">
+<div class="row m-2 justify-content-center">
     <div class="col-2">
         <label>Phone Number:</label>
     </div>
-    <div class="col-10">
+    <div class="col-2">
         <span class="span">@Model.profile.PhoneNumber</span>
     </div>
 </div>
 
-<div class="row m-2">
+<div class="row m-2 justify-content-center">
     <div class="col-2">
         <label>Last Login:</label>
     </div>
-    <div class="col-10">
+    <div class="col-2">
         <span class="span">@Model.profile.LastLoginTime.ToString("g")</span>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <a asp-page="ChangePassword" asp-route-id="@Model.profile.PersonId" class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Change Password</a>
+        </div>
     </div>
 </div>

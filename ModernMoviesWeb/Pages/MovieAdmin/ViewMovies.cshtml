@@ -71,8 +71,11 @@
 				</div>
 			</div>
 			<div class="row m-2">
-				<div class="col-2">
-					<a asp-page="EditMovie" asp-route-id="@movie.MovieID" class="btn btn-primary">Edit Movie</a>
+				<div class="col-3">
+					<a asp-page="EditMovie" asp-route-id="@movie.MovieID" class="btn btn-primary"> <i class="bi bi-pencil-square"></i> Edit Movie</a>
+				</div>
+				<div class="col-3">
+					<a asp-page="DeleteMovie" asp-route-id="@movie.MovieID" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this movie from the site permanently?');"><i class="bi bi-trash"></i> Delete Movie</a>
 				</div>
 			</div>
 		</div>
