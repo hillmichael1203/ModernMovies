@@ -8,11 +8,14 @@ using ModernMoviesWeb.Pages.Model;
 
 namespace ModernMoviesWeb.Pages.MovieAdmin
 {
+	//admin only page
 	[Authorize(Roles = "Administrator")]
 	[BindProperties]
     public class EditMovieModel : PageModel
     {
 		public Movie editedMovie { get; set; } = new Movie();
+		
+		//lists of genres and movie ratings pulled from database
 		public List<SelectListItem> Genres { get; set; } = new List<SelectListItem>();
 		public List<SelectListItem> Ratings { get; set; } = new List<SelectListItem>();
 		public void OnGet(int id)
@@ -22,6 +25,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			PopulateRatingDDL();
         }
 
+		//updating data for movie using changed values in model
 		public IActionResult OnPost(int id)
 		{
 			if (ModelState.IsValid)
@@ -53,6 +57,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			}
 		}
 
+		//method to pull the generes from the database and put them into a list to be used on the dropdown, identical to method from Add Movie
 		private void PopulateGenreDDL()
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
@@ -75,6 +80,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			}
 		}
 
+		//method to pull the ratings from the database and put them into a list to be used on the dropdown, identical to method from Add Movie
 		private void PopulateRatingDDL()
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
@@ -97,6 +103,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			}
 		}
 
+		//pulls the current movie id's info from the database
 		private void PopulateMovie(int id)
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
@@ -108,6 +115,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 				SqlDataReader reader = cmd.ExecuteReader();
 				if(reader.HasRows)
 				{
+					//pouplating the movie into the proper places in the model so it can be changed
 					reader.Read();
 					editedMovie.MovieID = id;
 					editedMovie.MovieName = reader.GetString(1);
