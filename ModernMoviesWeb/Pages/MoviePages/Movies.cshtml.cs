@@ -11,11 +11,14 @@ namespace ModernMoviesWeb.Pages.MoviePages
 	[BindProperties]
 	public class MoviesModel : PageModel
 	{
+		//list of genres and ratings pulled from database, as well as non-implemented attempts  at getting the checkboxed genres to store
 		public List<GenreInfo> Genres { get; set; } = new List<GenreInfo>();
 		public List<int> selectedGenreIDs { get; set; }
 		public List<RatingInfo> Ratings { get; set; } = new List<RatingInfo>();
 		public List<int> selectedRatingIDs { get; set; }
 		public List<Movie> Movies { get; set; } = new List<Movie>();
+
+		//populating list of genres, ratings, and the movies displayed on the page
 		public void OnGet()
 		{
 			PopulateGenreList();
@@ -23,6 +26,7 @@ namespace ModernMoviesWeb.Pages.MoviePages
 			PopulateMovie();
 		}
 
+		//populates the list of genres, similar to how is done in the Add Movie script
 		private void PopulateGenreList()
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
@@ -45,6 +49,7 @@ namespace ModernMoviesWeb.Pages.MoviePages
 				}
 			}
 		}
+		//populates the list of ratings, similar to how it is done in Add Movie script
 		private void PopulateRatingList()
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
@@ -69,6 +74,7 @@ namespace ModernMoviesWeb.Pages.MoviePages
 		}
 
 
+		//populates all movies from database using select statement
 		private void PopulateMovie()
 		{
 			Movies.Clear();
@@ -82,19 +88,17 @@ namespace ModernMoviesWeb.Pages.MoviePages
 				{
 					while (reader.Read())
 					{
-						//if (selectedGenreIDs.Contains(reader.GetInt32(4)) && selectedRatingIDs.Contains(reader.GetInt32(5)))
-						//{
-							var movie = new Movie();
-							movie.MovieName = reader.GetString(0);
-							movie.MovieDesc = reader.GetString(1);
-							movie.MinRuntime = reader.GetInt32(2);
-							movie.RatingID = reader.GetInt32(3);
-							movie.GenreID = reader.GetInt32(4);
-							movie.MovieID = reader.GetInt32(5);
-							movie.Image = reader.GetString(6);
-							movie.ReleaseDate = reader.GetDateTime(7);
-							Movies.Add(movie);
-						//}
+						//storing those movies into the list of movies
+						var movie = new Movie();
+						movie.MovieName = reader.GetString(0);
+						movie.MovieDesc = reader.GetString(1);
+						movie.MinRuntime = reader.GetInt32(2);
+						movie.RatingID = reader.GetInt32(3);
+						movie.GenreID = reader.GetInt32(4);
+						movie.MovieID = reader.GetInt32(5);
+						movie.Image = reader.GetString(6);
+						movie.ReleaseDate = reader.GetDateTime(7);
+						Movies.Add(movie);
 					}
 				}
 			}
