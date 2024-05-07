@@ -43,3 +43,9 @@ INSERT [dbo].[Genre] ([GenreID], [Genre]) VALUES (7, N'Musical')
 GO
 INSERT [dbo].[Genre] ([GenreID], [Genre]) VALUES (8, N'Romance')
 GO
+SET IDENTITY_INSERT [dbo].[Person] ON 
+GO
+INSERT [dbo].[Person] ([UserID], [Name], [Email], [Password], [PhoneNumber], [TypeID], [LastLoginTime]) VALUES (5003, N'Admin', N'admin@admin', N'$2a$13$vYVebrsxREhxSwub77KUBePE2AaAtr96N94wZJYk.BhLVpSnDYQBm', N'8888888888', 2, CAST(N'2024-05-06T22:09:07.000' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Person] OFF
+GO
