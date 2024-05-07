@@ -125,3 +125,49 @@ label {
     color: white;
 }
 
+.carousel {
+    width: auto; /* Adjust as needed */
+    /* Adjust as needed */
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-inner {
+    height: 900px;
+}
+
+.carousel-crop {
+    position: absolute;
+    object-fit: contain;
+    height: 720px;
+    z-index: 2;
+}
+
+.carousel-blur {
+    position: relative;
+    object-fit: cover;
+    height: 740px;
+    z-index: 1;
+    top: -720px;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    height: 720px
+}
+
+.relative{
+    position:relative;
+}
+
+.carousel-caption{
+    top: -720px;
+    left: 0px;
+    z-index: 3;
+}
+
+.carousel-control-prev{
+    z-index: 3;
+}
+
+.carousel-control-next {
+    z-index: 3;
+}

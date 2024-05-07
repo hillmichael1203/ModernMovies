@@ -19,22 +19,15 @@ namespace ModernMoviesWeb.Pages.Account
         {
             if(ModelState.IsValid)
             {
-				if (IsPasswordValid(newPerson.Password))
+				//Check if the email has been used for an account already before registering.
+				if (EmailDoesNotExist(newPerson.Email))
 				{
-					if (EmailDoesNotExist(newPerson.Email))
-					{
-						RegisterUser();
-						return RedirectToPage("Login");
-					}
-					else
-					{
-						ModelState.AddModelError("RegisterError", "The email has already been used. Please try a different one.");
-						return Page();
-					}
+					RegisterUser();
+					return RedirectToPage("Login");
 				}
 				else
 				{
-					ModelState.AddModelError("newPerson.Password", "Password must be 10-16 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
+					ModelState.AddModelError("RegisterError", "The email has already been used. Please try a different one.");
 					return Page();
 				}
 			}
@@ -44,21 +37,18 @@ namespace ModernMoviesWeb.Pages.Account
             }
         }
 
-		private bool IsPasswordValid(string password)
-		{
-			var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{10,16}$");
-
-			return regex.IsMatch(password);
-		}
-
 		private bool EmailDoesNotExist(string email)
 		{
+			//Searches the database for the given email. True if the email is not present.
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
+				//Create a SQL command
 				string cmdText = "SELECT * FROM Person WHERE Email = @email";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@email", email);
+				//Open the database
 				conn.Open();
+				//Execute the SQL command
 				SqlDataReader reader = cmd.ExecuteReader();
 				if(reader.HasRows)
 				{
@@ -73,15 +63,17 @@ namespace ModernMoviesWeb.Pages.Account
 
 		private void RegisterUser()
 		{
+			//Adds the new User into the database.
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				//2. create a SQL command
+				//Create a SQL command
 				string cmdText = "INSERT INTO Person(Name, Email, Password, PhoneNumber, TypeId, LastLoginTime) " +
 					"VALUES (@name, @email, @password, @phoneNumber, 0, @lastLoginTime )";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@name", newPerson.Name);
 				cmd.Parameters.AddWithValue("@email", newPerson.Email);
 				cmd.Parameters.AddWithValue("@password", SecurityHelper.GeneratePasswordHash(newPerson.Password));
+				//Phone number is an optional entry for the user.
 				if (newPerson.PhoneNumber != null)
 				{
 					cmd.Parameters.AddWithValue("@phoneNumber", newPerson.PhoneNumber);
@@ -91,9 +83,9 @@ namespace ModernMoviesWeb.Pages.Account
 					cmd.Parameters.AddWithValue("@phoneNumber", "000-000-0000");
 				}
 				cmd.Parameters.AddWithValue("@lastLoginTime", DateTime.Now.ToString());
-				//3. open the database
+				//Open the database
 				conn.Open();
-				//4. execute the SQL command
+				//Execute the SQL command
 				cmd.ExecuteNonQuery();
 			}
 		}

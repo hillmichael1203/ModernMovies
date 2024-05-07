@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace ModernMoviesWeb.Pages.Account
 {
+	//Only someone logged in may access this page.
 	[Authorize(Roles = "Customer,Employee,Administrator")]
 	[BindProperties]
 	public class ChangePasswordModel : PageModel
@@ -27,79 +28,71 @@ namespace ModernMoviesWeb.Pages.Account
 		{
 			if (ModelState.IsValid)
 			{
-				if (IsPasswordValid(changePassword.NewPassword))
+				using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 				{
-					using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
+					//Create a SQL command
+					string cmdText = "SELECT Password FROM Person WHERE UserID=@userID";
+					SqlCommand cmd = new SqlCommand(cmdText, conn);
+					cmd.Parameters.AddWithValue("@userID", id);
+					//Open the database
+					conn.Open();
+					//Execute the SQL command
+					SqlDataReader reader = cmd.ExecuteReader();
+
+					if (reader.HasRows)
 					{
-						string cmdText = "SELECT Password FROM Person WHERE UserID=@userID";
-						SqlCommand cmd = new SqlCommand(cmdText, conn);
-						cmd.Parameters.AddWithValue("@userID", id);
-						conn.Open();
-						SqlDataReader reader = cmd.ExecuteReader();
-
-						if (reader.HasRows)
+						reader.Read();
+						if (reader.IsDBNull(0))
 						{
-							reader.Read();
-							if (reader.IsDBNull(0))
-							{
-								ModelState.AddModelError("changePassword.OldPassword", "How'd you even do that? This account doesn't exist.");
-								return Page();
-							}
-							else
-							{
-								string passwordHash = reader.GetString(0);
-								if (SecurityHelper.VerifyPassword(changePassword.OldPassword, passwordHash))
-								{
-									ChangePassword(id);
-									return RedirectToPage("Profile");
-								}
-								else
-								{
-									ModelState.AddModelError("changePassword.OldPassword", "Old Password is incorrect");
-									return Page();
-
-								}
-							}
-						}
-						else
-						{
+							//Error if account had no password.
 							ModelState.AddModelError("changePassword.OldPassword", "How'd you even do that? This account doesn't exist.");
 							return Page();
 						}
+						else
+						{
+							string passwordHash = reader.GetString(0);
+							//Updates old password to new password if old password was correct. Returns to Profile.
+							if (SecurityHelper.VerifyPassword(changePassword.OldPassword, passwordHash))
+							{
+								ChangePassword(id);
+								return RedirectToPage("Profile");
+							}
+							else
+							{
+								ModelState.AddModelError("changePassword.OldPassword", "Old Password is incorrect");
+								return Page();
+
+							}
+						}
+					}
+					else
+					{
+						//Error if account does not exist.
+						ModelState.AddModelError("changePassword.OldPassword", "How'd you even do that? This account doesn't exist.");
+						return Page();
 					}
 				}
-				else
-				{
-					ModelState.AddModelError("newPerson.Password", "Password must be 10-16 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.");
-					return Page();
-				}
-				}
-				else
-				{
-					return Page();
-				}
-
+			}
+			else
+			{
+				return Page();
 			}
 
-		private bool IsPasswordValid(string password)
-		{
-			var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{10,16}$");
-
-			return regex.IsMatch(password);
 		}
 
 		private void ChangePassword(int id)
 		{
+			//Updates the database entry for the account with new password.
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				//2. create a SQL command
+				//Create a SQL command
 				string cmdText = "UPDATE Person SET Password = @password WHERE UserID = @userID";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@password", SecurityHelper.GeneratePasswordHash(changePassword.NewPassword));
 				cmd.Parameters.AddWithValue("@userID", id);
-				//3. open the database
+				//Open the database
 				conn.Open();
-				//4. execute the SQL command
+				//Execute the SQL command
 				cmd.ExecuteNonQuery();
 				conn.Close();
 			}

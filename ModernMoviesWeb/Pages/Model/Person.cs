@@ -22,6 +22,8 @@ namespace ModernMoviesWeb.Pages.Model
 		// The password for the user's account, required.
 		[Required(ErrorMessage = "The Password field is required.")]
 		[Display(Name = "Password")]
+
+		[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{10,16}$", ErrorMessage = "Password must be 10-16 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.")]
 		public string Password { get;set; }
 
 		// Optional phone number for the user, not a required field.
