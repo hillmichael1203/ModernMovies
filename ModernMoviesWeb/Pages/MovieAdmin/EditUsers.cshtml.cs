@@ -19,9 +19,10 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			PopulateUsers();
 		}
 
-		public IActionResult OnPost()
+		public IActionResult OnPost(int id)
 		{
 			Console.WriteLine("HIT!");
+			Console.WriteLine(id);
 			return RedirectToPage("EditUsers");
 		}
 
