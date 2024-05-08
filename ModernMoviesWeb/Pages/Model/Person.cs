@@ -31,7 +31,7 @@ namespace ModernMoviesWeb.Pages.Model
 		public string? PhoneNumber { get;set; }
 
 		// Role identifier linking to the role the user has (admin, customer, etc.). Not displayed in UI.
-		public string? RoleId { get;set; }
+		public int RoleId { get;set; }
 
 		// Tracks the last time a person logged in.
 		public DateTime LastLoginTime { get;set; }
