@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -7,6 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace ModernMoviesWeb.Pages.MovieAdmin
 {
+	[Authorize(Roles = "Administrator")]
 	public class EditUsersModel : PageModel
 	{
 		[BindProperty]
@@ -15,6 +17,12 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 		public void OnGet()
 		{
 			PopulateUsers();
+		}
+
+		public IActionResult OnPost()
+		{
+			Console.WriteLine("HIT!");
+			return RedirectToPage("EditUsers");
 		}
 
 		public void PopulateUsers()
