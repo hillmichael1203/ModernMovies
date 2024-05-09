@@ -6,6 +6,7 @@ using ModernMoviesBusiness;
 
 namespace ModernMoviesWeb.Pages.MovieAdmin
 {
+	//Only an administrator can access this page.
 	[Authorize(Roles = "Administrator")]
 	public class DeleteUserModel : PageModel
     {
@@ -13,13 +14,13 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
-				//deleting the movie from the database
+				//deleting the user from the database
 				string cmdText = "DELETE FROM Person WHERE UserID=@userID";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("userID", id);
 				conn.Open();
 				cmd.ExecuteNonQuery();
-				//returning to view movies page
+				//returning to edit users page
 				return RedirectToPage("EditUsers");
 			}
 		}

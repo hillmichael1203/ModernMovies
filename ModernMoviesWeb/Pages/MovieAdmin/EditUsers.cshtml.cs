@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace ModernMoviesWeb.Pages.MovieAdmin
 {
+	//Only an administrator may access this page.
 	[Authorize(Roles = "Administrator")]
 	public class EditUsersModel : PageModel
 	{
