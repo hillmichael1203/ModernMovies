@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using ModernMoviesBusiness;
 using ModernMoviesWeb.Pages.Model;
@@ -12,13 +13,46 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 	public class UpdateUserModel : PageModel
 	{
 		[BindProperty]
-		public Person updatedUser { get; set; } = new Person();
+		public EditUser updatedUser { get; set; } = new EditUser();
+		public List<SelectListItem> Roles { get; set; } = new List<SelectListItem>();
 		public void OnGet(int id)
+		{
+			PopulateUser(id);
+			PopulateRolesDDL();
+		}
+
+		public IActionResult OnPost(int id)
+		{
+			if (ModelState.IsValid)
+			{
+				using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
+				{
+					string cmdText = "UPDATE Person SET Name=@name, Email=@email, PhoneNumber=@phoneNumber, TypeID=@typeID WHERE UserID = @userID";
+					SqlCommand cmd = new SqlCommand(cmdText, conn);
+					cmd.Parameters.AddWithValue("@name", updatedUser.Name);
+					cmd.Parameters.AddWithValue("@email", updatedUser.Email);
+					cmd.Parameters.AddWithValue("@phoneNumber", updatedUser.PhoneNumber);
+					cmd.Parameters.AddWithValue("@typeID", updatedUser.RoleId);
+					cmd.Parameters.AddWithValue("@userID", id);
+
+					conn.Open();
+					cmd.ExecuteNonQuery();
+					return RedirectToPage("EditUsers");
+				}
+			}
+			else
+			{
+				PopulateUser(id);
+				return Page();
+			}
+		}
+
+		public void PopulateUser(int id)
 		{
 			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
 			{
 				//pulls relevant user info to load into list of users
-				string cmdText = "SELECT UserID, Name, Email, Password, PhoneNumber, TypeID, LastLoginTime FROM Person WHERE UserID=@userID";
+				string cmdText = "SELECT UserID, Name, Email, PhoneNumber, TypeID FROM Person WHERE UserID=@userID";
 				SqlCommand cmd = new SqlCommand(cmdText, conn);
 				cmd.Parameters.AddWithValue("@userID", id);
 				conn.Open();
@@ -31,11 +65,31 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 						updatedUser.PersonId = reader.GetInt32(0);
 						updatedUser.Name = reader.GetString(1);
 						updatedUser.Email = reader.GetString(2);
-						updatedUser.Password = reader.GetString(3);
-						updatedUser.PhoneNumber = reader.GetString(4);
-						updatedUser.RoleId = reader.GetInt32(5);
-						updatedUser.LastLoginTime = reader.GetDateTime(6);
+						updatedUser.PhoneNumber = reader.GetString(3);
+						updatedUser.RoleId = reader.GetInt32(4);
 					}
+				}
+			}
+		}
+
+		public void PopulateRolesDDL()
+		{
+			using (SqlConnection conn = new SqlConnection(SecurityHelper.GetDBConnectionString()))
+			{
+				string cmdText = "SELECT TypeID, TypeName FROM AccountType ORDER BY TypeID";
+				SqlCommand cmd = new SqlCommand(cmdText, conn);
+				conn.Open();
+				SqlDataReader reader = cmd.ExecuteReader();
+				if (reader.HasRows)
+				{
+					while (reader.Read())
+					{
+						var type = new SelectListItem();
+						type.Value = reader.GetInt32(0).ToString();
+						type.Text = reader.GetString(1);
+						Roles.Add(type);
+					}
+
 				}
 			}
 		}
