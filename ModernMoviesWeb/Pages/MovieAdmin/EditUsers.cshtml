@@ -41,7 +41,20 @@
 					<label class="form-label" asp-for="@user.RoleId"></label>
 				</div>
 				<div class="col-10">
-					<label class="form-label">@user.RoleId</label>
+					@if (@user.RoleId == 0)
+					{
+						<label class="form-label">Customer</label>
+
+					}
+					@if (@user.RoleId == 1)
+					{
+						<label class="form-label">Employee</label>
+
+					}
+					@if (@user.RoleId == 2)
+					{
+						<label class="form-label">Administrator</label>
+					}
 				</div>
 			</div>
 			<div class="row m-2">

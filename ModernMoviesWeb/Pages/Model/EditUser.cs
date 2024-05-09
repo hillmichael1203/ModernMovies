@@ -22,7 +22,7 @@ namespace ModernMoviesWeb.Pages.Model
 		public string? PhoneNumber { get; set; }
 
 		// Role identifier linking to the role the user has (admin, customer, etc.). Not displayed in UI.
-		[Display(Name = "Role ID")]
+		[Display(Name = "Role")]
 		public int RoleId { get; set; }
 	}
 }
