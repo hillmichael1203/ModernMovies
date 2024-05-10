@@ -47,6 +47,7 @@ namespace ModernMoviesWeb.Pages.MovieAdmin
 			{
 				//Returns user input errors
 				PopulateUser(id);
+				PopulateRolesDDL();
 				return Page();
 			}
 		}
